@@ -3,20 +3,21 @@ import {IconButton, Typography} from '@mui/material'
 import {AddOutlined, MailOutline} from '@mui/icons-material'
 import { JournalLayout } from '../layout/JournalLayout'
 import { Noteview, NothingSelectedView } from '../views'
-import { startNewNot } from '../../store/journal/thunks'
+import { startNewNot, startSaveNote } from '../../store/journal/thunks'
+import { useForm } from '../../hooks/useForm'
 
 
 
 export const JournalPage = () => {
   
   const dispatch = useDispatch();
-
+ 
   const {isSaving, active} = useSelector(state => state.journal);
   
   const onClicNewNote = () => {
     dispatch( startNewNot());
   }
-  
+   
   
   return (
     <JournalLayout>

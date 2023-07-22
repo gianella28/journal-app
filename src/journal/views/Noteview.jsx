@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useRef } from "react"
 import { useDispatch, useSelector } from "react-redux"
-import { DeleteOutline, SaveOutlined, TextFields, UploadOutlined } from "@mui/icons-material"
-import { Button, Grid, IconButton, TextField, Typography } from "@mui/material"
+import { DeleteOutline, Message, SaveOutlined, TextFields, UploadOutlined } from "@mui/icons-material"
+import { Alert, AlertTitle, Button, Grid, IconButton, TextField, Typography } from "@mui/material"
 import Swal from "sweetalert2"
 import 'sweetalert2/dist/sweetalert2.css'
 import { ImageGallery } from "../components"
@@ -36,11 +36,15 @@ export const Noteview = () => {
       }
     }, [messageSaved])
     
-
-
     const onSaveNote = () =>{
-        dispatch( startSaveNote() );
+        console.log(title+'title1')
+        if(title != ''){
+            dispatch( startSaveNote() );
+        }else{
+            Swal.fire('Error, El titulo de la nota es requerido', messageSaved,'error')
+        }
     }
+
     const onFileInputChange =({target}) =>{
         console.log(target.files)
         if(target.files ===0) return;

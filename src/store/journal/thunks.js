@@ -4,7 +4,7 @@ import { addNewEmptyNote, deleteNoteById, savingNewNote, setActiveNote, setNotes
 import { fileUpload, loadNotes } from "../../helpers";
 
 export const startNewNot = () =>{
-
+    
     return async( dispatch, getState) =>{
         dispatch( savingNewNote());
        
@@ -15,14 +15,20 @@ export const startNewNot = () =>{
             body:'',
             date: new Date().getTime(),
         }
+        //console.log(Object.values(newNote.title));
+       
+            const newDoc = doc (collection (FirebaseDB, `${uid}/journal/notes`));
+            const setDocResp= await setDoc(newDoc, newNote);
+            newNote.id = newDoc.id;
 
-        const newDoc = doc (collection (FirebaseDB, `${uid}/journal/notes`));
-        const setDocResp= await setDoc(newDoc, newNote);
-        newNote.id = newDoc.id;
+            console.log({newDoc,setDocResp});
+            dispatch( addNewEmptyNote (newNote));
+            dispatch( setActiveNote (newNote));
+        
+        
+       
 
-        console.log({newDoc,setDocResp});
-        dispatch( addNewEmptyNote (newNote));
-        dispatch( setActiveNote (newNote));
+        
        
     }
 }

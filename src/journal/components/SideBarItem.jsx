@@ -17,7 +17,9 @@ export const SideBarItem = ({title='',body,id,date,imageUrls=[]}) => {
         ?title.substring(0,17) +'...'
         :title;
     },[title]);
-  return (
+
+    if(title !=='') 
+    return (
     <ListItem disablePadding>
         <ListItemButton onClick={onClicNote}>
             <ListItemIcon>
@@ -33,4 +35,7 @@ export const SideBarItem = ({title='',body,id,date,imageUrls=[]}) => {
 
     </ListItem>
   )
+
+  return (console.log('no hay titulo'));
+  
 }
